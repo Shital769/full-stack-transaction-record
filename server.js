@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import cors from "cors"
+import cors from "cors";
 import helmet from "helmet";
 
 const app = express();
@@ -18,9 +18,22 @@ app.use(express.json()); //convert income data in the req.body
 import { connectDB } from "./src/config/dbConfig.js";
 connectDB();
 
+//routers
+import userRouter from "./src/routers/userRouter.js";
+app.use("/api/v1/user", userRouter);
+
 app.use("*", (req, res) => {
   res.json({
     message: "Your are in the wrong place, please go back",
+  });
+});
+
+//global error handler
+app.use((error, req, res, next) => {
+  const code = error.code || 500;
+  res.status(code).json({
+    status: "error",
+    message: error.message,
   });
 });
 
