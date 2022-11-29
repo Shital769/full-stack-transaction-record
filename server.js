@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8000;
 app.use(morgan("dev")); // logs all the incoming req information
 
 //app.use(helmet()); //setting default security headers to protect some attacks
-//app.use(cors());  // allow cross orrigin resources
+app.use(cors()); // allow cross orrigin resources
 
 app.use(express.json()); //convert income data in the req.body
 
@@ -24,8 +24,18 @@ app.use("/api/v1/user", userRouter);
 
 app.use("*", (req, res) => {
   res.json({
+    status: "error",
     message: "Your are in the wrong place, please go back",
   });
+});
+
+//catch when router is not found
+app.use("*", (req, res, next) => {
+  const error = {
+    message: "404 page not found",
+    code: 200,
+  };
+  next(error);
 });
 
 //global error handler

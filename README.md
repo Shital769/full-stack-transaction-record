@@ -22,10 +22,10 @@ All the endpoitnts will follow the following `{router}/api/v1`
 
 User API will use the following path `{rooturl}/api/v1/user`. This api will allow clients to create user, login and more.
 
-| #   | PATH | METHOD | IS PRIAVTE | DESCRIPTION                   |
-| --- | ---- | ------ | ---------- | ----------------------------- |
-| 1.  | "/"  | POST   | False      | allow user to create new user |
-| 1.  | "/"  | GET    | False      | allow user to                 |
+| #   | PATH | METHOD | IS PRIAVTE | DESCRIPTION                      |
+| --- | ---- | ------ | ---------- | -------------------------------- |
+| 1.  | "/"  | POST   | False      | allow user to create new user    |
+| 1.  | "/"  | GET    | False      | allow user to send email and pin |
 
 ## Transaction API
 
