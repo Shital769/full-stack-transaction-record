@@ -29,7 +29,7 @@ User API will use the following path `{rooturl}/api/v1/user`. This api will allo
 
 ## Transaction API
 
-Transaction API will use the following path `{rooturl}/api/v1/transaction`. This api will allow clients to CRUD operation on transaction table.
+Transaction API will use the following path `{rooturl}/api/v1/transactions`. This api will allow clients to CRUD operation on transaction table.
 
 | #   | PATH | METHOD | IS PRIAVTE | DESCRIPTION                                                             |
 | --- | ---- | ------ | ---------- | ----------------------------------------------------------------------- |

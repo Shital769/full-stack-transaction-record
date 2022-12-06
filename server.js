@@ -6,7 +6,7 @@ import helmet from "helmet";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-//middleware
+//middlewares
 app.use(morgan("dev")); // logs all the incoming req information
 
 //app.use(helmet()); //setting default security headers to protect some attacks
@@ -20,7 +20,9 @@ connectDB();
 
 //routers
 import userRouter from "./src/routers/userRouter.js";
+import transactionRouter from "./src/routers/transactionRouter.js";
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/transactions", transactionRouter);
 
 app.use("*", (req, res) => {
   res.json({
@@ -40,6 +42,7 @@ app.use("*", (req, res, next) => {
 
 //global error handler
 app.use((error, req, res, next) => {
+  console.log(error);
   const code = error.code || 500;
   res.status(code).json({
     status: "error",
