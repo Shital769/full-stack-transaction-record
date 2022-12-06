@@ -21,8 +21,9 @@ connectDB();
 //routers
 import userRouter from "./src/routers/userRouter.js";
 import transactionRouter from "./src/routers/transactionRouter.js";
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/transactions", transactionRouter);
+import { isAuthorized } from "./src/middleware/authorizationMiddleware.js";
+app.use("/api/v1/user",  userRouter);
+app.use("/api/v1/transactions", isAuthorized, transactionRouter);
 
 app.use("*", (req, res) => {
   res.json({

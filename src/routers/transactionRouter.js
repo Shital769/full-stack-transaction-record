@@ -1,4 +1,5 @@
 import express from "express";
+
 import {
   getAllUserTransactions,
   insertTransactions,
@@ -7,7 +8,7 @@ import {
 const router = express();
 
 //read
-router.get("/", async (req, res, next) => {
+router.get("/",  async (req, res, next) => {
   try {
     const { authorization } = req.headers;
 
