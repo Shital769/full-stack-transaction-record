@@ -1,4 +1,4 @@
-import transactionSchema from "./transactionSchema.js";
+import transactionSchema from "./TransactionSchema.js";
 
 //CRUD
 
