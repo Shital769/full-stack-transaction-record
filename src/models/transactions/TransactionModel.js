@@ -1,21 +1,21 @@
-import transactionSchema from "./TransactionSchema.js";
+import TransactionSchema from "./TransactionSchema.js";
 
 //CRUD
 
 //insert
 export const insertTransactions = (insertObj) => {
-  return transactionSchema(insertObj).save();
+  return TransactionSchema(insertObj).save();
 };
 
 //read all transactions, @filter must be an object{}
 
 export const getAllUserTransactions = (filterObj) => {
-  return transactionSchema.find(filterObj);
+  return TransactionSchema.find(filterObj);
 };
 
 //delete
 export const deleteManyTransactions = (ids, userId) => {
-  return transactionSchema.deleteMany({
+  return TransactionSchema.deleteMany({
     _id: {
       $in: ids,
     },
