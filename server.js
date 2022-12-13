@@ -1,6 +1,9 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import path from "path";
 import helmet from "helmet";
 
 const app = express();
@@ -14,6 +17,9 @@ app.use(cors()); // allow cross orrigin resources
 
 app.use(express.json()); //convert income data in the req.body
 
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/client/build")));
+
 //MongoDB connection
 import { connectDB } from "./src/config/dbConfig.js";
 connectDB();
@@ -22,30 +28,23 @@ connectDB();
 import userRouter from "./src/routers/userRouter.js";
 import transactionRouter from "./src/routers/transactionRouter.js";
 import { isAuthorized } from "./src/middleware/authorizationMiddleware.js";
-app.use("/api/v1/user",  userRouter);
+app.use("/api/v1/user", userRouter);
 app.use("/api/v1/transactions", isAuthorized, transactionRouter);
 
-app.use("*", (req, res) => {
-  res.json({
-    status: "error",
-    message: "Your are in the wrong place, please go back",
-  });
+//catch when router is not found
+app.use("/dashboard", (req, res, next) => {
+  res.sendFile("/");
 });
 
-//catch when router is not found
-app.use("*", (req, res, next) => {
-  const error = {
-    message: "404 page not found",
-    code: 200,
-  };
-  next(error);
+app.use("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/build/index.html"));
 });
 
 //global error handler
 app.use((error, req, res, next) => {
-  console.log(error);
-  const code = error.code || 500;
-  res.status(code).json({
+  //  console.log(error);
+  // const code = error.code || 500;
+  res.json({
     status: "error",
     message: error.message,
   });

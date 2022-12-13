@@ -6,6 +6,10 @@ const transactionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    },
     amount: {
       type: Number,
       required: true,
@@ -15,7 +19,6 @@ const transactionSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: true,
-
     },
   },
   { timestamps: true }

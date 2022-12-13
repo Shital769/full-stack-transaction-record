@@ -3,12 +3,13 @@ import express from "express";
 import {
   getAllUserTransactions,
   insertTransactions,
+  deleteManyTransactions,
 } from "../models/transactions/TransactionModel.js";
 
 const router = express();
 
 //read
-router.get("/",  async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const { authorization } = req.headers;
 
@@ -48,12 +49,22 @@ router.post("/", async (req, res, next) => {
 });
 
 //delete
-router.delete("/", (req, res, next) => {
+router.delete("/", async (req, res, next) => {
   try {
-    res.json({
-      status: "success",
-      message: "delete method to do",
-    });
+    console.log(req.body);
+    const { authorization } = req.headers;
+
+    const result = await deleteManyTransactions(req.body, authorization);
+    console.log(result);
+    result?.deletedCount
+      ? res.json({
+          status: "success",
+          message: result.deletedCount + "item(s) deleted",
+        })
+      : res.json({
+          status: "error",
+          message: "Nothing happened",
+        });
   } catch (error) {
     next(error);
   }

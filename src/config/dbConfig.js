@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 export const connectDB = () => {
   try {
-    const connectionString = "mongodb://localhost:27017/nov_transaction";
-    const connection = mongoose.connect(connectionString);
+    const connection = mongoose.connect(process.env.MONGO_CLIENT);
 
-connection? console.log("Mongo connected") : console.log("Mongo couldn't connected");;
-
+    connection
+      ? console.log("Mongo connected")
+      : console.log("Mongo couldn't connected");
   } catch (error) {
     console.log(error);
   }
