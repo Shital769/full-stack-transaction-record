@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8000;
 app.use(morgan("dev")); // logs all the incoming req information
 
 //app.use(helmet()); //setting default security headers to protect some attacks
-app.use(cors()); // allow cross orrigin resources
+app.use(cors()); // allow cross origin resources
 
 app.use(express.json()); //convert income data in the req.body
 
